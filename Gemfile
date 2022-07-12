@@ -44,6 +44,9 @@ gem 'jquery-rails'
 # 環境変数
 gem 'dotenv-rails'
 
+# socialiizatioinを使用できる
+gem 'socialization'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

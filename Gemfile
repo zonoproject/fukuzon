@@ -44,8 +44,14 @@ gem 'jquery-rails'
 # 環境変数
 gem 'dotenv-rails'
 
-# socialiizatioinを使用できる
+# socialiizatioin
 gem 'socialization'
+
+# ページネーションを実装
+gem 'kaminari'  
+
+# それらしい値を自動生成できる
+gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
 
 
 group :development, :test do

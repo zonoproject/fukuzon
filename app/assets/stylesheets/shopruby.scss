@@ -225,3 +225,37 @@ label {
 .review-score-color:focus {
   color: #FFC0CB;
 }
+
+.dashboard-edit-link {
+  font-family: YuGo;
+  font-size: 14px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #FFC0CB;
+}
+
+.dashboard-delete-link {
+  font-family: YuGo;
+  font-size: 14px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #666666;
+}
+
+.h-10 {
+  height: 10%!important;
+}
+
+.w-20 {
+  width: 20%!important;
+}
+
+.w-80 {
+  width: 80%!important;
+}

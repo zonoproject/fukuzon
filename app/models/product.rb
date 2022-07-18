@@ -2,10 +2,8 @@ class Product < ApplicationRecord
     belongs_to :category
     has_many :reviews
     acts_as_likeable
-    
-    PER = 15
  
-    scope :display_list, -> (page) { page(page).per(PER) }
+    extend DisplayList
     scope :on_category, -> (category) { where(category_id: category) }
     scope :sort_order, -> (order) { order(order) }
  
@@ -13,6 +11,11 @@ class Product < ApplicationRecord
         on_category(category).
         display_list(page)
     }
+    
+    scope :search_for_id_and_name, -> (keyword) {
+        where("name LIKE ?", "%#{keyword}%").
+        or(where("id LIKE ?", "%#{keyword}%"))
+    }  
     scope :sort_products, -> (sort_order, page) {
         on_category(sort_order[:sort_category]).
         sort_order(sort_order[:sort]).

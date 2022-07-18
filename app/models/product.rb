@@ -30,6 +30,9 @@ class Product < ApplicationRecord
             "新しい順" => "updated_at desc"
         }
    }
+   
+    scope :recently_products, -> (number) { order(created_at: "desc").take(number) }
+    
     def reviews_new
         reviews.new
     end

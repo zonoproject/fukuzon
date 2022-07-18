@@ -4,27 +4,42 @@ class Dashboard::ProductsController < ApplicationController
   layout "dashboard/dashboard"
 
   def index
-    if sort_params.present?
-      @category = Category.request_category(sort_params[:sort_category])
-      @products = Product.sort_products(sort_params, params[:page])
-    elsif params[:category].present?
-      @category = Category.request_category(params[:category])
-      @products = Product.category_products(@category, params[:page])
-    else
-      @products = Product.display_list(params[:page])
+    @sorted = ""
+    @sort_list = Product.sort_list
+
+    if params[:sort].present?
+      @sorted = params[:sort]
     end
 
-    @major_category_names = Category.major_categories
+    if params[:keyword].present?
+      keyword = params[:keyword].strip
+      @total_count = Product.search_for_id_and_name(keyword).count
+      @products = Product.search_for_id_and_name(keyword).display_list(params[:pages])
+    else      
+      @total_count = Product.count
+      @products = Product.sort_order(@sorted).display_list(params[:page])
+    end
+  end
+
+  def new
+    @product = Product.new
     @categories = Category.all
-    @sort_list = Product.sort_list
   end
 
-  def show
-    @reviews = @product.reviews_with_id
-    @review = @reviews.new
-    @star_repeat_select = Review.star_repeat_select
+  def create
+    @product = Product.new(product_params)
+    @product.save
+    redirect_to dashboard_products_path
   end
 
+  def edit
+    @categories = Category.all
+  end
+
+  def update
+    @product.update(product_params)
+    redirect_to dashboard_products_path
+  end
 
   def destroy
     @product.destroy

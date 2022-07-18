@@ -44,7 +44,8 @@ Rails.application.routes.draw do
       put "mypage", :to => "users#update"
       get "mypage/edit_password", :to =>"users#edit_password"
       put "mypage/password", :to => "users#update_password"
-      get  "mypage/favorite", :to => "users#favorite"
+      get "mypage/favorite", :to => "users#favorite"
+      delete "mypage/delete", :to => "users#destroy"
     end
   end
   

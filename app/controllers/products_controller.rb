@@ -15,6 +15,13 @@ class ProductsController < ApplicationController
     @categories = Category.all
     @major_category_names = Category.major_categories
     @sort_list = Product.sort_list
+    
+    if params[:keyword].present?
+      keyword = params[:keyword].strip
+      @products = Product.search_for_id_and_name(keyword).display_list(params[:pages])
+    else      
+      @products = Product.sort_order(@sorted).display_list(params[:page])
+    end
   end
 
   def show

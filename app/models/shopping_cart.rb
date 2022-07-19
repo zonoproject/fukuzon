@@ -12,6 +12,8 @@ class ShoppingCart < ApplicationRecord
   scope :bought_days_pg, -> { bought_carts.pluck("distinct(date_trunc('day', updated_at + '9 hours'))").map{ |d| d.in_time_zone('Asia/Tokyo') }.reverse }
   scope :search_bought_carts_by_month, -> (month) { bought_carts.where(updated_at: month.all_month) }
   scope :search_bought_carts_by_day, -> (day) { bought_carts.where(updated_at: day.all_day) }
+  scope :search_carts_by_ids, -> (ids) { where("id LIKE ?", "%#{ids}%") }
+  scope :search_bought_carts_by_ids, -> (ids) { bought_carts.search_carts_by_ids(ids) }    
   scope :sort_list, -> {
     {"日別": "daily", "月別": "month"}
   }

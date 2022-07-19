@@ -9,7 +9,11 @@
         <div class="col-md-8 mt-2">
           <div class="d-inline-flex">
             <%= link_to product_path(favorite), class: "w-25" do %>
-              <%= image_tag "/images/dummy.png", class: "img-fuild w-100" %>
+              <% if favorite.image.attached? %>
+                <%= image_tag favorite.image, class: "img-fuild w-100" %>
+              <% else %>
+                <%= image_tag "/images/dummy.png", class: "img-fuild w-100" %>
+              <% end %>
             <% end %>
             <div class="container mt-3">
               <h5 class="w-100 shopruby-favorite-item-text"><%= favorite.name %></h5>

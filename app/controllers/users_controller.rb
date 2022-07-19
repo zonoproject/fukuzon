@@ -39,6 +39,15 @@ class UsersController < ApplicationController
     @user.update(deleted_flg: @user.deleted_flg)
     redirect_to mypagraile_users_url
   end
+  
+  def cart_history_index
+    @orders = ShoppingCart.search_bought_carts_by_user(@user).page(params[:page]).per(15)
+  end
+  
+  def cart_history_show
+    @cart = ShoppingCart.find(params[:num])
+    @cart_items = ShoppingCartItem.user_cart_items(@cart.id)
+  end
 
   private
 

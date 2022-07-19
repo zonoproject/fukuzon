@@ -19,8 +19,6 @@ class ProductsController < ApplicationController
     if params[:keyword].present?
       keyword = params[:keyword].strip
       @products = Product.search_for_id_and_name(keyword).display_list(params[:pages])
-    else      
-      @products = Product.sort_order(@sorted).display_list(params[:page])
     end
   end
 

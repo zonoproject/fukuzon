@@ -15,6 +15,10 @@ class ShoppingCart < ApplicationRecord
   scope :sort_list, -> {
     {"日別": "daily", "月別": "month"}
   }
+  
+  CARRIAGE = 800
+  FREE_SHIPPING = 0
+
  
   def self.get_monthly_sales
     if Rails.env.production?
@@ -71,4 +75,11 @@ class ShoppingCart < ApplicationRecord
   def tax_pct
     0
   end
+  
+  def shipping_cost
+    product_ids = ShoppingCartItem.user_cart_item_ids(self.id)
+    products_carriage_list = Product.check_products_carriage_list(product_ids)
+    products_carriage_list.include?(true) ? Money.new(CARRIAGE * 100)
+                                          : Money.new(FREE_SHIPPING)
+   end
 end

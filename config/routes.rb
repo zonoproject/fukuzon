@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
   devise_for :admins, :controllers => {
-    :sessions => 'admins/sessions'
+    :sessions => 'admins/sessions',
+    :registrations => 'admins/registrations'
   }
  
   devise_scope :admin do
     get    "dashboard",        :to => "dashboard#index"
+    get    "admins/signup",    :to => "admins/registrations#new"
     get    "dashboard/login",  :to => "admins/sessions#new"
     post   "dashboard/login",  :to => "admins/sessions#create"
     delete "dashboard/logout", :to => "admins/sessions#destroy"
@@ -26,10 +28,10 @@ Rails.application.routes.draw do
   
   devise_for :users, :controllers => {
     :registrations => 'users/registrations',
-    :sessions => 'users/sessions',
-    :passwords => 'users/passwords',
+    :sessions      => 'users/sessions',
+    :passwords     => 'users/passwords',
     :confirmations => 'users/confirmations',
-    :unlocks => 'users/unlocks',
+    :unlocks       => 'users/unlocks',
   }
 
   devise_scope :user do

@@ -19,6 +19,6 @@ class User < ApplicationRecord
     result
   end
   scope :search_information, -> (keyword) { 
-    where("name LIKE :keyword OR id LIKE :keyword OR email LIKE :keyword OR address LIKE :keyword OR postal_code LIKE :keyword OR phone LIKE :keyword", keyword: "%#{keyword}%")
+    where("cast(name as text) LIKE :keyword OR cast(id as text) LIKE :keyword OR cast(email as text) LIKE :keyword OR cast(address as text) LIKE :keyword OR cast(postal_code as text) LIKE :keyword OR cast(phone as text) LIKE :keyword", keyword: "%#{keyword}%")
   }
 end

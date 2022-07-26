@@ -14,6 +14,9 @@ module Rubyshop
     config.i18n.default_locale = :ja
     
     config.time_zone = 'Tokyo'
+    
+    ###この1行が必要
+    config.logger = Logger.new(STDOUT)
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers

@@ -8,6 +8,7 @@ class UsersController < ApplicationController
   def update
     @user.update_without_password(user_params)
     redirect_to mypage_users_url
+    logger.debug @user.errors.inspect 
   end
 
   def mypage
